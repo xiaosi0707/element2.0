@@ -28,15 +28,10 @@
   };
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
-  @import "./common/sass/index.scss";
-  .tab{
-    width: rem(750);
-    height: rem(80);
-    li{
-      float: left;
-      width:rem(250);
-      text-align: center;
-    }
-  }
+<style lang="stylus" rel="stylesheet/stylus">
+  @import "common/stylus/index.styl";
+  .tab
+    width: rem(750)
+    height: rem(80)
+    background: pink
 </style>

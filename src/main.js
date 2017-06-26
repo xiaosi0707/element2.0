@@ -7,7 +7,7 @@ import ratings from './components/ratings/ratings.vue';
 import seller from './components/seller/seller.vue';
 import VueRouter from 'vue-router';
 
-import './common/sass/index.scss';
+import './common/stylus/index.styl';
 
 Vue.use(VueRouter);
 
