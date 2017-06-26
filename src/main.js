@@ -2,6 +2,9 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
 import App from './App';
+import foods from './components/foods/foods.vue';
+import ratings from './components/ratings/ratings.vue';
+import seller from './components/seller/seller.vue';
 import VueRouter from 'vue-router';
 
 import './common/sass/index.scss';
@@ -9,9 +12,9 @@ import './common/sass/index.scss';
 Vue.use(VueRouter);
 
 const routes = [
-  {path: '/foods', components: './components/foods/foods.vue'},
-  {path: '/ratings', components: './components/ratings/ratings.vue'},
-  {path: '/seller', components: './components/seller/seller.vue'}
+  {path: '/foods', component: foods},
+  {path: '/ratings', component: ratings},
+  {path: '/seller', component: seller}
 ];
 const router = new VueRouter({
   routes
@@ -22,4 +25,5 @@ new Vue({
   template: '<App/>',
   components: { App },
   router
-});
+}).$mount('#app');
+

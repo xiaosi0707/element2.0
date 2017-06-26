@@ -3,9 +3,9 @@
     <v-header></v-header>
     <div class="tab">
       <ul>
-        <li>商品</li>
-        <li>评价</li>
-        <li>商家</li>
+        <li><router-link to="/foods">商品</router-link></li>
+        <li><router-link to="/ratings">评价</router-link></li>
+        <li><router-link to="/seller">商家</router-link></li>
       </ul>
     </div>
     <router-view></router-view>
@@ -28,6 +28,15 @@
   };
 </script>
 
-<style>
-
+<style lang="scss" rel="stylesheet/scss">
+  @import "./common/sass/index.scss";
+  .tab{
+    width: rem(750);
+    height: rem(80);
+    li{
+      float: left;
+      width:rem(250);
+      text-align: center;
+    }
+  }
 </style>
