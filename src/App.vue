@@ -8,8 +8,8 @@
         <li><router-link to="/seller">商家</router-link></li>
       </ul>
     </div>
-    <router-view></router-view>
-    <v-layer :seller="seller"></v-layer>
+    <router-view :seller="seller"></router-view>
+    <v-layer v-show="layerShow" :seller="seller"></v-layer>
   </div>
 </template>
 
@@ -31,7 +31,8 @@
     },
     data() {
       return {
-          seller: {}
+          seller: {},
+          layerShow: false
       };
     },
     created() {

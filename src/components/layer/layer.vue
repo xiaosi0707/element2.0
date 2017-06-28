@@ -8,8 +8,16 @@
       <div class="line"></div>
     </div>
     <ul class="supports" v-for="item in seller.supports">
-      <li class="support-item"><i class="icon" :class="classMap[item.type]">{{item.type}}</i>{{item.description}}</li>
+      <li class="support-item"><span class="icon" :class="classMap[item.type]">{{item.type}}</span>{{item.description}}</li>
     </ul>
+    <div class="title">
+      <div class="line"></div>
+      <div class="text">商家公告</div>
+      <div class="line"></div>
+    </div>
+    <div class="bulletin">
+      <p class="content">{{seller.bulletin}}</p>
+    </div>
   </div>
 </template>
 
@@ -76,4 +84,19 @@
           background-repeat no-repeat
           &.decrese
             bg-image('decrease_1')
+          &.discount
+            bg-image('discount_1')
+          &.guarantee
+            bg-image('guarantee_1')
+          &.invoice
+            bg-image('invoice_1')
+          &.special
+            bg-image('special_1')
+    .bulletin
+      margin rem(50) auto
+      width rem(560)
+      .content
+        font-size rem(24)
+        line-height rem(48)
+        color rgb(255, 255, 255)
 </style>

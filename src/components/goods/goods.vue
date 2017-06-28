@@ -2,7 +2,7 @@
   <div class="goods">
     <div class="menu-wrapper" ref="menuWrapper">
       <ul>
-        <li class="menu-item border-1px" v-for="(item, index) in goods" :class="{'current': currentIndex === index}">
+        <li class="menu-item border-1px" v-for="(item, index) in goods" :class="{'current': currentIndex === index}" @click="selectMenu(index)">
           <span class="text"><span v-show="item.type>0" class="icon" :class="classMap[item.type]" ></span>{{item.name}}</span>
         </li>
       </ul>
@@ -27,19 +27,36 @@
                   <span class="now">¥{{food.price}}</span>
                   <span class="old" v-show="food.oldPrice">¥{{food.oldPrice}}</span>
                 </div>
+                <div class="cartcontrol-wrapper">
+                  <v-cartControl :goods="goods"></v-cartControl>
+                </div>
               </div>
             </li>
           </ul>
         </li>
       </ul>
     </div>
+    <v-shopCart :seller="seller"></v-shopCart>
   </div>
 </template>
 
 <script>
   import VueAxios from 'axios';
   import BScroll from 'better-scroll';
+
+  import shopCart from '../shopcart/shopcart.vue';
+  import cartControl from '../cartcontrol/cartcontrol.vue';
+
   export default {
+    components: {
+        'v-shopCart': shopCart,
+      'v-cartControl': cartControl
+    },
+    props: {
+        seller: {
+            type: Object
+        }
+    },
     data() {
       return {
         goods: [],
@@ -76,8 +93,15 @@
       });
     },
     methods: {
+      selectMenu(index) {
+        let foodList = this.$refs.foodWrapper.querySelectorAll('.food-list-hook');
+        let el = foodList[index];
+        this.foodScroll.scrollToElement(el, 300);
+      },
       initScroll() {
-        this.menuScroll = new BScroll(this.$refs.menuWrapper, {});
+        this.menuScroll = new BScroll(this.$refs.menuWrapper, {
+          click: true
+        });
         this.foodScroll = new BScroll(this.$refs.foodWrapper, {
           probeType: 3
         });
