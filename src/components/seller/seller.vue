@@ -1,4 +1,3 @@
-<script src="../../../../element1/src/main.js"></script>
 <template>
   <div>商家</div>
 </template>

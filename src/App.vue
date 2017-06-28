@@ -9,6 +9,7 @@
       </ul>
     </div>
     <router-view></router-view>
+    <v-layer :seller="seller"></v-layer>
   </div>
 </template>
 
@@ -18,13 +19,15 @@
   import foods from './components/goods/goods.vue';
   import ratings from './components/ratings/ratings.vue';
   import seller from './components/seller/seller.vue';
+  import layer from './components/layer/layer.vue';
 
   export default {
     components: {
       'v-header': header,
       'v-foods': foods,
       'v-ratings': ratings,
-      'v-seller': seller
+      'v-seller': seller,
+      'v-layer': layer
     },
     data() {
       return {

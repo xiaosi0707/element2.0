@@ -2,12 +2,12 @@
   <div class="goods">
     <div class="menu-wrapper" ref="menuWrapper">
       <ul>
-        <li class="menu-item border-1px" v-for="item in goods">
+        <li class="menu-item border-1px" v-for="(item, index) in goods" :class="{'current': currentIndex === index}">
           <span class="text"><span v-show="item.type>0" class="icon" :class="classMap[item.type]" ></span>{{item.name}}</span>
         </li>
       </ul>
     </div>
-    <div class="foods-wrapper" ref="foodWrapper">
+      <div class="foods-wrapper" ref="foodWrapper">
       <ul>
         <li class="food-list food-list-hook" v-for="item in goods">
           <h1 class="title">{{item.name}}</h1>
@@ -43,8 +43,24 @@
     data() {
       return {
         goods: [],
-        classMap: []
+        classMap: [],
+        listHeight: [],
+        scrollY: 0
       };
+    },
+    computed: {
+        currentIndex() {
+            console.log(this.scrollY);
+            for (let i = 0; i < this.listHeight.length; i++) {
+              let height1 = this.listHeight[i];
+              let height2 = this.listHeight[i + 1];
+              console.log(height1 + '|' + height2);
+              if (this.scrollY >= height1 && this.scrollY <= height2) {
+                return i;
+              }
+            };
+            return 0;
+        }
     },
     created() {
       this.classMap = ['decrese', 'discount', 'guarantee', 'invoice', 'special'];
@@ -54,6 +70,7 @@
           this.goods = data;
           this.$nextTick(() => {
             this.initScroll();
+            this.getHeight();
           });
         }
       });
@@ -61,7 +78,22 @@
     methods: {
       initScroll() {
         this.menuScroll = new BScroll(this.$refs.menuWrapper, {});
-        this.foodScroll = new BScroll(this.$refs.foodWrapper, {});
+        this.foodScroll = new BScroll(this.$refs.foodWrapper, {
+          probeType: 3
+        });
+        this.foodScroll.on('scroll', (pos) => {
+           this.scrollY = Math.abs(Math.round(pos.y));
+        });
+      },
+      getHeight() {
+        let foodsList = this.$refs.foodWrapper.querySelectorAll('.food-list-hook');
+        let height = 0;
+        this.listHeight.push(height);
+        for (let i = 0; i < foodsList.length; i++) {
+          height += foodsList[i].clientHeight;
+          this.listHeight.push(height);
+        };
+        console.log(this.listHeight);
       }
     }
   };
@@ -91,7 +123,7 @@
           z-index: 10
           margin-top: rem(-1)
           font-weight: 700
-          background: #fff
+          background: #FFFFFF
         .icon
           display: inline-block
           vertical-align: top
